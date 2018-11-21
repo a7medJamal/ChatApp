@@ -3,8 +3,41 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <script src="/Scripts/jquery-1.6.4.js"></script>
+    <script src="/Scripts/jquery.signalR-2.4.0.min.js"></script>
+    <script src="/signalr/hubs"></script>
+    <script>
+        var ChatHub;
+
+        $(function () {
+            // first step  -acess to hub
+            ChatHub = $.connection.Chat;
+            // second step  -register to message
+            ChatHub.client.receiveMessage = onReceive;
+            // third  step  -send request to server
+            $.connection.hub.start();
+
+        });
+
+        var onReceive = function (msg) {
+
+            $("#divConv").append("<div>" + msg + "</div>");
+        };
+        
+        var onSend = function () {
+            var msg = $("#txtMessage").val();
+            ChatHub.server.sendMessage(msg);
+        };
+    </script>
+
 </head>
 <body>
-   
+    <label> Message </label>
+    <input  type="text" id="txtMessage" />
+    <input  type="button" id="btnSend" value="Send" onclick="onSend()" />
+
+    <div id="divConv">
+
+    </div>
 </body>
 </html>
