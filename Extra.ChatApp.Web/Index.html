@@ -14,6 +14,10 @@
             ChatHub = $.connection.Chat;
             // second step  -register to message
             ChatHub.client.receiveMessage = onReceive;
+
+            // this for watching code in backing with console in browser.
+          //  $.connection.hub.logging = true;
+
             // third  step  -send request to server
             $.connection.hub.start();
 
