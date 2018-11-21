@@ -12,7 +12,9 @@ namespace Extra.ChatApp.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            var context = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
+
+            context.Clients.All.receiveMessage("Hello from web form!");
         }
     }
 }
