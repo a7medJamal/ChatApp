@@ -27,6 +27,18 @@ namespace Extra.ChatApp.Web
 
         }
 
+        public async Task JoinGroup(string groupName)
+        {
+           await Groups.Add(Context.ConnectionId, groupName);
+            Clients.Group(groupName).receiveMessage($"{Context.ConnectionId} : joined group {groupName}");
+        }
+
+        public void SendGroupMessage (string groupName,string message)
+        {
+            Clients.Group(groupName).receiveMessage(message);
+        }
+
+
         public override Task OnConnected()
         {
             Clients.All.receiveMessage($"{Context.ConnectionId} : connected");

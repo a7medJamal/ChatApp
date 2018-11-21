@@ -32,13 +32,38 @@
             var msg = $("#txtMessage").val();
             ChatHub.server.sendMessage(msg);
         };
+
+        // for group name
+        var onJoinGroup = function () {
+
+            var group = $("#txtGroupName").val();
+            ChatHub.server.joinGroup(group);
+
+        };
+
+        var onsendGroup = function () {
+
+            var group = $("#txtGroupName").val();
+            var msg = $("#txtMessageGroup").val();
+            ChatHub.server.sendGroupMessage(group,msg);
+        };
+        
     </script>
 
 </head>
 <body>
     <label> Message </label>
-    <input  type="text" id="txtMessage" />
-    <input  type="button" id="btnSend" value="Send" onclick="onSend()" />
+    <input type="text" id="txtMessage" />
+    <input type="button" id="btnSend" value="Send" onclick="onSend()" />
+   
+    <br />
+    <!--for group-->
+    <input type="text" id="txtGroupName" />
+    <br />
+    <input type="text" id="txtMessageGroup" />
+
+    <input type="button" id="btnJoin" value="JoinGroup" onclick="onJoinGroup()" />
+    <input type="button" id="btnSendGroup" value="Send to group" onclick="onsendGroup()" />
 
     <div id="divConv">
 
